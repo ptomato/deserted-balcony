@@ -1,0 +1,63 @@
+---
+app-id: name.ptomato.DesertedBalcony
+branch: master
+command: name.ptomato.DesertedBalcony
+
+runtime: org.gnome.Platform
+runtime-version: '3.30'
+sdk: org.gnome.Sdk
+
+finish-args:
+  - --share=ipc
+  - --socket=wayland
+  - --socket=x11
+  - --talk-name=com.endlessm.HackSoundServer
+
+modules:
+  - name: gtksourceview
+    config-opts:
+      - --disable-vala
+      - --disable-gtk-doc
+    sources:
+      - type: archive
+        url: http://ftp.gnome.org/pub/GNOME/sources/gtksourceview/3.24/gtksourceview-3.24.8.tar.xz
+        sha256: 1e9bb8ff190db705deb916dd23ff681f0e8803aec407bf0fd64c7e615ac436fe
+  - name: python-dbus
+    buildsystem: simple
+    build-commands:
+      - pip3 install --no-index --find-links "file://${PWD}" --prefix=${FLATPAK_DEST} dbus-python
+    sources:
+      - type: file
+        url: https://pypi.python.org/packages/ad/1b/76adc363212c642cabbf9329457a918308c0b9b5d38ce04d541a67255174/dbus-python-1.2.4.tar.gz
+        sha256: e2f1d6871f74fba23652e51d10873e54f71adab0525833c19bad9e99b1b2f9cc
+  - name: python-dbusmock
+    buildsystem: simple
+    build-commands:
+      - pip3 install --no-index --find-links "file://${PWD}" --prefix=${FLATPAK_DEST} python-dbusmock
+    sources:
+      - type: file
+        url: https://pypi.python.org/packages/4d/cd/a5f571ef37addb45a86eca2e66a6b4789d915dbb9170a997dba02b7a0a89/python-dbusmock-0.17.tar.gz
+        sha256: 58f802ef4c659a1adbca31eb6c26688f1c09599b5832354eb258340b66673346
+  - name: eos-metrics
+    build-options:
+      config-opts:
+        - --disable-gtk-doc
+        - --disable-gir-doc
+      env:
+        PYTHONPATH: /app/lib/python3.7
+    sources:
+      - type: git
+        url: https://github.com/endlessm/eos-metrics
+        branch: sdk-5
+  - name: hack-toolbox-app
+    buildsystem: meson
+    sources:
+      - type: git
+        url: https://github.com/endlessm/hack-toolbox-app
+        branch: master
+  - name: deserted-balcony
+    buildsystem: meson
+    sources:
+      - type: git
+        path: .
+        branch: HEAD

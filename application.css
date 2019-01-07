@@ -1,0 +1,59 @@
+.canvas {
+    border-radius: 50%;
+    padding: 0;
+    transition: padding 1s;
+}
+
+.canvas border {
+    border-width: 0;
+}
+
+.canvas.inflate {
+    padding: 200px;
+}
+
+.function-add-button {
+    background-image: image(green);
+    border-radius: 50%;
+    color: white;
+    margin: 6px;
+}
+
+.function-add-button:hover {
+    background-image: image(rgba(255, 255, 255, 0.2)),
+                      image(green);
+}
+
+.function-add-button:active {
+    background-image: image(rgba(0, 0, 0, 0.2)),
+                      image(green);
+}
+
+.item-button {
+    background-image: image(coral);
+    border-radius: 5px;
+    color: white;
+    padding: 4px;
+}
+
+.item-button:hover {
+    background-image: image(rgba(255, 255, 255, 0.2)),
+                      image(coral);
+}
+
+.item-button:active {
+    background-image: image(rgba(0, 0, 0, 0.2)),
+                      image(coral);
+}
+
+.hint {
+    animation: pulse-hint 1s infinite alternate;
+}
+
+@keyframes pulse-hint {
+    0% {   box-shadow: 0 0 4px 4px aliceblue; }
+    100% { box-shadow: 0 0 0   0   aliceblue; }
+}
+
+/* override hack-toolbox CSS */
+notebook tab { min-height: unset; }

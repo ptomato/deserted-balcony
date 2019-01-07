@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/name/ptomato/DesertedBalcony/js">
+    <file>app.js</file>
+    <file>colorUtils.js</file>
+    <file>model.js</file>
+    <file>win.js</file>
+  </gresource>
+</gresources>

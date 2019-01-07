@@ -1,0 +1,30 @@
+#!@GJS@
+
+const {Gio, GLib} = imports.gi;
+const Package = imports.package;
+
+Package.require({
+    GLib: '2.0',
+    Gtk: '3.0',
+});
+
+Package.init({
+    name: 'deserted-balcony',
+    version: '@PACKAGE_VERSION@',
+    prefix: '@prefix@',
+    datadir: '@datadir@',
+    libdir: '@libdir@',
+});
+
+const hackToolboxDir = GLib.build_filenamev([Package.datadir, 'com.endlessm.HackToolbox']);
+
+const hackToolboxData = Gio.Resource.load(GLib.build_filenamev([hackToolboxDir,
+    'com.endlessm.HackToolbox.data.gresource']));
+hackToolboxData._register();
+
+const hackToolboxSrc = Gio.Resource.load(GLib.build_filenamev([hackToolboxDir,
+    'com.endlessm.HackToolbox.src.gresource']));
+hackToolboxSrc._register();
+imports.searchPath.push('resource:///com/endlessm/HackToolbox/js');
+
+Package.run(imports.app);
