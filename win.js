@@ -306,6 +306,12 @@ var DbWindow = GObject.registerClass(class DbWindow extends Gtk.ApplicationWindo
 
         this._clickNotebookIndex = this._notebook.append_page(grid, clickIcon);
         this._notebook.page = this._clickNotebookIndex;
+
+        this._clickTarget.add(new Gtk.Label({
+            label: 'CLICK\nME',
+            justify: Gtk.Justification.CENTER,
+            visible: true,
+        }));
     }
 
     _clickCompile() {

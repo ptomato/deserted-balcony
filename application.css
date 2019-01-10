@@ -8,6 +8,12 @@
     border-width: 0;
 }
 
+.canvas label {
+    color: black;
+    font-size: small;
+    font-weight: bold;
+}
+
 .canvas.inflate {
     padding: 200px;
 }
